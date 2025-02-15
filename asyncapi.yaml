@@ -1,0 +1,31 @@
+asyncapi: '2.0.0'
+info:
+  title: Order Processing API
+  version: '1.0.0'
+  description: API for processing customer orders.
+
+servers:
+  production:
+    url: mqtt://broker.example.com
+    protocol: mqtt
+
+channels:
+  order/created:
+    description: Channel for order creation events.
+    subscribe:
+      summary: Receive a new order event.
+      operationId: onOrderCreated
+      message:
+        contentType: application/json
+        payload:
+          type: object
+          properties:
+            orderId:
+              type: string
+              description: Unique order ID
+            customerName:
+              type: string
+              description: Name of the customer
+            totalAmount:
+              type: number
+              description: Total amount of the order
